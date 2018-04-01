@@ -1,0 +1,10 @@
+D:\WebAPI Test\WebApi.Data\bin\Release\WebApi.Data.dll.config
+D:\WebAPI Test\WebApi.Data\bin\Release\WebApi.Data.dll
+D:\WebAPI Test\WebApi.Data\bin\Release\WebApi.Data.pdb
+D:\WebAPI Test\WebApi.Data\bin\Release\EntityFramework.dll
+D:\WebAPI Test\WebApi.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\WebAPI Test\WebApi.Data\bin\Release\EntityFramework.xml
+D:\WebAPI Test\WebApi.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\WebAPI Test\WebApi.Data\obj\Release\WebApi.Data.csprojResolveAssemblyReference.cache
+D:\WebAPI Test\WebApi.Data\obj\Release\WebApi.Data.dll
+D:\WebAPI Test\WebApi.Data\obj\Release\WebApi.Data.pdb

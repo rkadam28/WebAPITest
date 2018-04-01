@@ -1,0 +1,108 @@
+﻿<div class="jumbotron">
+
+    <div class="form-horizontal">
+        <h2>User Registration</h2>
+        <hr />        
+        <div class="form-group">            
+            <label class="control-label col-md-2">User Name</label> 
+            <div class="col-md-10">       
+                <input type="text" id="txtUserName" class="form-control" />                         
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.Label("Password", htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">Password</label> 
+            <div class="col-md-10">
+                <input type="text" id="txtPassword" class="form-control" />                
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">First Name</label> 
+            <div class="col-md-10">
+                <input type="text" id="txtFirstName" class="form-control" /> 
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">Last Name</label> 
+            <div class="col-md-10">
+                <input type="text" id="txtLastName" class="form-control" /> 
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2">Date Of Birth</label> 
+            <div class="col-md-10">
+                <input type="date" id="txtDateOfBirth" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="submit" value="submit" />
+            </div>
+        </div>
+        
+    </div>
+    </div>
+<div class="row">
+    <table id="tbPerson" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <td>User Name</td>
+                <td>Password</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>DOB</td>
+            </tr>
+        </thead> 
+        <tbody></tbody>       
+    </table>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        Permit();
+    });
+    function Permit() {
+        $.ajax({
+            url: "http://localhost:59617/api/Values",
+            type: "Get",
+            success: function (data) {                
+                for (var i = 0; i < data.length; i++) {                    
+                    $("#tbPerson").find('tbody').append("<tr><td>" + data[i].UserName + "</td><td>" + data[i].Password + "</td><td>" + data[i].FirstName +
+                     "</td><td>" + data[i].LastName + "</td><td>" + data[i].DateOfBirth + "</td></tr>");
+                }
+            },
+            error: function (msg) { alert(msg); }
+        });
+    }
+ 
+    $("#submit").click(function () {            
+            var username = $('#txtUserName').val(); //  ' rupesh.kadam@gmail.com';
+            var password = $('#txtPassword').val(); //'password';            
+            var name = $('#txtFirstName').val(); //'Rupesh';
+            var lastname = $('#txtLastName').val(); //'Kadam';            
+            var dob = $('#txtDateOfBirth').val(); //'1983/04/01';            
+            $.ajax({
+                url: "http://localhost:59617/api/Values",
+                type: "Post",
+                data: JSON.stringify([username, password, name, lastname, dob]),                 
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#tbPerson").find('tbody').append("<tr><td>" + data.UserName + "</td><td>" + data.Password + "</td><td>" + data.FirstName +
+                     "</td><td>" + data.LastName + "</td><td>" + data.DateOfBirth + "</td></tr>");
+                    $('#txtUserName').val('');
+                    $('#txtPassword').val('');
+                    $('#txtFirstName').val('');
+                    $('#txtLastName').val('');
+                    $('#txtDateOfBirth').val('');
+                },
+                error: function () { alert('Internal System error'); }
+            });
+        }); 
+</script>
